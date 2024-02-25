@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDoctor.TestFramework
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BD3E309F-5175-4C68-8FFA-5F1A986C3D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDoctor.Backend.Linux.Tests", "ProcessDoctor.Backend.Linux.Tests\ProcessDoctor.Backend.Linux.Tests.csproj", "{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDoctor.Backend.Linux", "ProcessDoctor.Backend.Linux\ProcessDoctor.Backend.Linux.csproj", "{5AA9CED2-16C7-45DA-8C86-8509900210B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,7 @@ Global
 		{732E6C91-83E0-4197-9B02-21FD5BB0840F} = {BD3E309F-5175-4C68-8FFA-5F1A986C3D09}
 		{6A05F117-4A4F-4921-9600-77AEED86F0D2} = {BD3E309F-5175-4C68-8FFA-5F1A986C3D09}
 		{F45DBA78-E9A4-4C55-946C-24538B05C664} = {BD3E309F-5175-4C68-8FFA-5F1A986C3D09}
+		{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3} = {BD3E309F-5175-4C68-8FFA-5F1A986C3D09}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6346D6A2-0AB9-40F7-A191-B1AEA6C90207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -77,5 +82,13 @@ Global
 		{6A05F117-4A4F-4921-9600-77AEED86F0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A05F117-4A4F-4921-9600-77AEED86F0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A05F117-4A4F-4921-9600-77AEED86F0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12EF9933-3BC7-4C99-AE1A-D2CBAFFAB8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AA9CED2-16C7-45DA-8C86-8509900210B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AA9CED2-16C7-45DA-8C86-8509900210B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AA9CED2-16C7-45DA-8C86-8509900210B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AA9CED2-16C7-45DA-8C86-8509900210B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

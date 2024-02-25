@@ -5,7 +5,7 @@ using ProcessDoctor.Backend.Windows.WMI.Interfaces;
 
 namespace ProcessDoctor.Backend.Windows.WMI;
 
-public sealed class ManagementEventWatcherAdapter(ILog logger, WqlEventQuery query) : IManagementEventWatcher
+internal sealed class ManagementEventWatcherAdapter(ILog logger, WqlEventQuery query) : IManagementEventWatcher
 {
     private bool _isDisposed;
 

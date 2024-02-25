@@ -2,6 +2,6 @@ namespace ProcessDoctor.Backend.Core.Enums;
 
 public enum ObservationTarget
 {
-    Launched,
-    Terminated
+    Launched = 1,
+    Terminated = 2
 }
