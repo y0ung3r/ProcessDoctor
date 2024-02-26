@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using JetBrains.Diagnostics;
 using JetBrains.Lifetimes;
+using ProcessDoctor.Backend.Core;
 using ProcessDoctor.ViewModels;
 using ProcessDoctor.Views;
 
@@ -26,7 +27,9 @@ public partial class App : Application
                 DataContext = new MainWindowViewModel(
                     lifetime,
                     Log.GetLog<MainWindowViewModel>(),
-                    new ProcessMonitorFactory().Create(lifetime))
+                    new ProcessMonitor(
+                        Log.GetLog<ProcessMonitor>(),
+                        new ProcessProviderFactory().Create(lifetime)))
             };
         }
 

@@ -4,6 +4,8 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <DefineConstants Condition="$([MSBuild]::IsOsPlatform('Windows'))">WINDOWS</DefineConstants>
+        <DefineConstants Condition="$([MSBuild]::IsOsPlatform('Linux'))">LINUX</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
@@ -12,6 +14,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
@@ -28,9 +31,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ProcessDoctor.Backend.Core\ProcessDoctor.Backend.Core.csproj" />
-      <ProjectReference Include="..\ProcessDoctor.Backend.Windows\ProcessDoctor.Backend.Windows.csproj" />
-      <ProjectReference Include="..\ProcessDoctor.Backend.Linux\ProcessDoctor.Backend.Linux.csproj" />
+        <ProjectReference Include="..\ProcessDoctor.Backend.Core\ProcessDoctor.Backend.Core.csproj" />
+        <ProjectReference Include="..\ProcessDoctor.Backend.Linux\ProcessDoctor.Backend.Linux.csproj" />
+        <ProjectReference Include="..\ProcessDoctor.Backend.Windows\ProcessDoctor.Backend.Windows.csproj" />
     </ItemGroup>
 
 </Project>
