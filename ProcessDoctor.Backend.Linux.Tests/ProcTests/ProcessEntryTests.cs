@@ -37,6 +37,21 @@ public sealed class ProcessEntryTests : ProcTestsBase
     }
 
     [Fact]
+    public void Command_line_should_be_null_if_value_is_empty()
+    {
+        // Arrange
+        var processDirectory = CreateTestProcess(id: 1);
+        CreateCommandLineFile(id: 1, string.Empty);
+
+        var sut = ProcessEntry.Create(processDirectory);
+
+        // Act & Assert
+        sut.CommandLine
+            .Should()
+            .BeNull();
+    }
+
+    [Fact]
     public void Should_read_process_status_section_properly()
     {
         // Arrange

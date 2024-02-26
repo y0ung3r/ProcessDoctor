@@ -6,6 +6,8 @@ namespace ProcessDoctor.Backend.Linux.Proc;
 
 public sealed class ProcessEntry
 {
+    private const int MaxExecutablePathSize = 2048;
+
     private readonly IDirectoryInfo _processDirectory;
     private string? _commandLine;
     private string? _executablePath;
@@ -24,15 +26,30 @@ public sealed class ProcessEntry
     private ProcessEntry(IDirectoryInfo processDirectory)
         => _processDirectory = processDirectory;
 
-    public string CommandLine
-        => _commandLine ??= _processDirectory
-            .FileSystem
-            .File
-            .ReadAllText(
-                _processDirectory
-                    .FileSystem
-                    .Path
-                    .Combine(_processDirectory.FullName, ProcPaths.CommandLine.FileName));
+    public string? CommandLine
+    {
+        get
+        {
+            if (_commandLine is not null)
+                return _commandLine;
+
+            var path = _processDirectory
+                .FileSystem
+                .Path
+                .Combine(_processDirectory.FullName, ProcPaths.CommandLine.FileName);
+
+            var value = _processDirectory
+                .FileSystem
+                .File
+                .ReadAllText(path)
+                .Replace('\0', ' ');
+
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
+
+            return _commandLine ??= value;
+        }
+    }
 
     public string? ExecutablePath
     {
@@ -41,19 +58,18 @@ public sealed class ProcessEntry
             if (_executablePath is not null)
                 return _executablePath;
 
-            const int bufferSize = 2048;
             var path = _processDirectory
                 .FileSystem
                 .Path
                 .Combine(_processDirectory.FullName, ProcPaths.ExecutablePath.FileName);
 
-            var buffer = new byte[bufferSize + 1];
-            var count = LibC.ReadLink(path, buffer, bufferSize);
+            var buffer = new byte[MaxExecutablePathSize + 1];
+            var count = LibC.ReadLink(path, buffer, MaxExecutablePathSize);
 
             if (count <= 0)
                 return null;
 
-            buffer[count] = 0x0; // ?
+            buffer[count] = 0x0;
 
             return _executablePath = Encoding.UTF8.GetString(buffer, index: 0, count);
         }
