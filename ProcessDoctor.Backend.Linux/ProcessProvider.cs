@@ -19,6 +19,8 @@ public sealed class ProcessProvider(Lifetime lifetime, ILog logger, IFileSystem 
         var lifetimeScope = lifetime.CreateNested();
         var watcher = fileSystem.FileSystemWatcher.New(ProcPaths.Path);
 
+        watcher.NotifyFilter = NotifyFilters.DirectoryName;
+
         lifetimeScope
             .Lifetime
             .AddDispose(watcher);
@@ -27,9 +29,13 @@ public sealed class ProcessProvider(Lifetime lifetime, ILog logger, IFileSystem 
             .Lifetime
             .OnTermination(() =>
             {
+                watcher.EnableRaisingEvents = false;
+
                 logger.Info("File system event watcher has been stopped");
                 logger.Info("File system event watcher has been disposed");
             });
+
+        watcher.EnableRaisingEvents = true;
 
         logger.Info("File system event watcher has been started");
 
