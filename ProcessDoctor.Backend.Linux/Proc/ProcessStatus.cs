@@ -67,10 +67,10 @@ public sealed class ProcessStatus
             if (_id is not null)
                 return _id.Value;
 
-            var rawValue = ReadValue(lineIndex: 5);
+            var rawValue = ReadValue(lineIndex: 6);
 
             if (!uint.TryParse(rawValue, out var id))
-                ThrowIfPropertyValueIsInvalid(lineIndex: 5);
+                ThrowIfPropertyValueIsInvalid(lineIndex: 6);
 
             return _id ??= id;
         }
@@ -83,10 +83,10 @@ public sealed class ProcessStatus
             if (_parentId is not null)
                 return _parentId;
 
-            var rawValue = ReadValue(lineIndex: 6);
+            var rawValue = ReadValue(lineIndex: 7);
 
             if (!uint.TryParse(rawValue, out var parentId))
-                ThrowIfPropertyValueIsInvalid(lineIndex: 6);
+                ThrowIfPropertyValueIsInvalid(lineIndex: 7);
 
             if (parentId == 0 || Id == parentId)
                 return null;
