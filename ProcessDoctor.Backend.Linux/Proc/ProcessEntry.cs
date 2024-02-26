@@ -28,9 +28,13 @@ public sealed class ProcessEntry
         => _commandLine ??= _processDirectory
             .FileSystem
             .File
-            .ReadAllText(Path.Combine(_processDirectory.FullName, ProcPaths.CommandLine.FileName));
+            .ReadAllText(
+                _processDirectory
+                    .FileSystem
+                    .Path
+                    .Combine(_processDirectory.FullName, ProcPaths.CommandLine.FileName));
 
-    public string ExecutablePath
+    public string? ExecutablePath
     {
         get
         {
@@ -38,17 +42,20 @@ public sealed class ProcessEntry
                 return _executablePath;
 
             const int bufferSize = 2048;
-            var path = Path.Combine(_processDirectory.FullName, ProcPaths.ExecutablePath.FileName);
+            var path = _processDirectory
+                .FileSystem
+                .Path
+                .Combine(_processDirectory.FullName, ProcPaths.ExecutablePath.FileName);
+
             var buffer = new byte[bufferSize + 1];
             var count = LibC.ReadLink(path, buffer, bufferSize);
 
             if (count <= 0)
-                throw new InvalidOperationException(
-                    $"An error occurred while reading exe file: {LibC.GetLastError()}");
+                return null;
 
-            buffer[count] = 0; // ?
+            buffer[count] = 0x0; // ?
 
-            return _executablePath = Encoding.UTF8.GetString(buffer, 0, count);
+            return _executablePath = Encoding.UTF8.GetString(buffer, index: 0, count);
         }
     }
 
